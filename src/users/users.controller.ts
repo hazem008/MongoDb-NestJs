@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -8,14 +9,15 @@ import {
   Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { UserDto } from 'src/dto/users.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly service: UsersService) {}
 
   @Post()
-  Add() {
-    return this.service.Add();
+  Add(@Body() body: UserDto) {
+    return this.service.Add(body);
   }
   @Get()
   FindAll() {
@@ -23,18 +25,22 @@ export class UsersController {
   }
   @Get('/:id')
   FindOne(@Param('id') id: string) {
-    return this.service.FindOne();
+    return this.service.FindOne(id);
   }
   @Put('/:id')
-  Update(@Param('id') id: string) {
-    return this.service.Update();
+  Update(@Param('id') id: string, @Body() body: UserDto) {
+    return this.service.Update(id, body);
   }
   @Delete('/:id')
   Delete(@Param('id') id: string) {
-    return this.service.Delete();
+    return this.service.Delete(id);
   }
   @Post('/search')
   Search(@Query('key') key) {
-    return this.service.search();
+    return this.service.Search(key);
+  }
+  @Post('/faker')
+  faker() {
+    return this.service.faker();
   }
 }
