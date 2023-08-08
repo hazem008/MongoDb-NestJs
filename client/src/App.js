@@ -26,14 +26,14 @@ function App() {
             <FormControl>
               <Input type="text" onChange={onchangeHandler} />
             </FormControl>
-            <Button leftIcon={<AiOutlineSearch />} colorScheme='teal' variant='outline' maxW="300px" minW="150px" onClick={() => SearchHandler()}>
+            <Button leftIcon={<AiOutlineSearch />} colorScheme='blue' variant='outline' maxW="300px" minW="150px" onClick={() => SearchHandler()}>
               Searsh
             </Button>
           </Box>
         </Box>
         <Box mt="5" rounded="lg" boxShadow="base">
           <Box p="4" display={'flex'} justifyContent="space-between">
-            <Text fontSize="xl" fontWeight="bold">List Of Users</Text>
+            <Text fontSize="xl" fontWeight="bold" color={'blackAlpha.900'}>List Of Users</Text>
             <Button colorScheme='blue' variant='outline' maxW="300px" minW="150px" leftIcon={<AiOutlinePlus fontSize={'20px'} />} onClick={onOpen}>Add User
             </Button>
           </Box>
