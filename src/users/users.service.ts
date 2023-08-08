@@ -1,23 +1,56 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { UserDto } from 'src/dto/users.dto';
+import { User, UserDocument } from 'src/models/users.models';
+import { faker } from '@faker-js/faker';
 
 @Injectable()
 export class UsersService {
-  Add() {
-    return 'add page';
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+
+  Add(body: UserDto) {
+    return this.userModel.create(body);
   }
   FindAll() {
-    return 'find all page';
+    return this.userModel.find();
   }
-  FindOne() {
-    return 'find one page';
+  FindOne(id: string) {
+    return this.userModel.findById({ _id: id });
   }
-  Update() {
-    return 'update page';
+  Update(id: string, body: UserDto) {
+    return this.userModel.findByIdAndUpdate(
+      { _id: id },
+      { $set: body },
+      { new: true },
+    );
   }
-  Delete() {
-    return 'delete page';
+  Delete(id: string) {
+    return this.userModel.deleteOne({ _id: id });
   }
-  search() {
-    return 'search page';
+  Search(key: string) {
+    const keyword = key
+      ? {
+          $or: [
+            { firstName: { $regex: key, $options: 'i' } },
+            { email: { $regex: key, $options: 'i' } },
+          ],
+        }
+      : {};
+    return this.userModel.find(keyword);
+  }
+
+  faker() {
+    for (let i = 0; i < 30; i++) {
+      const user = new this.userModel({
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        age: 38,
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+      });
+      this.userModel.create(user);
+    }
+    return 'success';
   }
 }
