@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDto } from 'src/dto/users.dto';
 import { User, UserDocument } from 'src/models/users.models';
-import { faker, th } from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 @Injectable()
 export class UsersService {
@@ -48,7 +48,6 @@ export class UsersService {
         age: 38,
         email: faker.internet.email(),
         password: faker.internet.password(),
-        phone: 24255223,
       });
       this.userModel.create(user);
     }

@@ -15,8 +15,4 @@ export class UserDto {
 
   @IsNotEmpty()
   password: string;
-
-  @IsNotEmpty()
-  phone: number;
-
 }
