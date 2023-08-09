@@ -40,7 +40,7 @@ export default function Wrapper({ children }) {
               setUsers(users.filter((user) => user._id !== id));
               FetchUsers();
               toast({
-                title: 'Utilisateur supprimé avec succès !',
+                title: 'User successfully deleted!',
                 status: 'success',
                 duration: 4000,
                 isClosable: true,
@@ -56,7 +56,7 @@ export default function Wrapper({ children }) {
         axios
             .post('/api/users', form)
             .then(res => {
-                setUsers([...users, res.data])
+                setUsers([ res.data,...users])
                 toast({
                     title: 'User Added!',
                     status: 'success',
