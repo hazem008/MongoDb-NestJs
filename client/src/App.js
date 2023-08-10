@@ -1,11 +1,13 @@
 import React from "react";
-import UsersApp from "./components/UsersApp";
+import Navbar1 from "./components/Navbar1";
 
 function App() {
   return (
-    <div className="App">
-      <UsersApp />
-    </div>
+    <>
+     
+      <Navbar1 />
+
+   </>
   );
 }
 

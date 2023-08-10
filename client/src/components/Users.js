@@ -5,7 +5,7 @@ import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 import Row from './Row';
 import DrawerExample from './DrawerExample';
 
-function UsersApp() {
+function Users() {
     const { FetchUsers, Search, users, onOpen } = useContext(GlobalContext);
     const [query, setQuery] = useState('');
 
@@ -37,7 +37,7 @@ function UsersApp() {
                 </Box>
                 <Box mt="5" rounded="lg" boxShadow="base">
                     <Box p="4" display={'flex'} justifyContent="space-between">
-                        <Text fontSize="xl" fontWeight="bold" color={'blackAlpha.900'}>List Of Users</Text>
+                        <Text fontSize="xl" fontWeight="bold" color={'blackAlpha.900'}>All Users</Text>
                         <Button colorScheme='blue' variant='outline' maxW="300px" minW="150px" leftIcon={<AiOutlinePlus fontSize={'20px'} />} onClick={onOpen}>Add User
                         </Button>
                     </Box>
@@ -72,4 +72,4 @@ function UsersApp() {
     );
 
 }
-export default UsersApp;
+export default Users;
