@@ -14,6 +14,13 @@ import {
     useDisclosure,
     useColorModeValue,
     Stack,
+    MenuButton,
+    Avatar,
+    MenuList,
+    MenuItem,
+    MenuDivider,
+    Button,
+
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
@@ -23,7 +30,6 @@ import About from './About';
 import Contact from './Contact';
 import Users from './Users';
 import Dashboard from './Dashboard';
-
 
 
 interface Props {
@@ -76,7 +82,23 @@ export default function App() {
                     </HStack>
                     <Flex alignItems={'center'}>
                         <Menu>
-                            {/* Reste du code pour le menu */}
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}>
+                                <Avatar
+                                    size={'sm'}
+                                    src={'hazem.png'}
+                                />
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem>Link 1</MenuItem>
+                                <MenuItem>Link 2</MenuItem>
+                                <MenuDivider />
+                                <MenuItem>Link 3</MenuItem>
+                            </MenuList>
                         </Menu>
                     </Flex>
                 </Flex>
@@ -106,9 +128,10 @@ export default function App() {
                     <Route path="/contact">
                         <Contact />
                     </Route>
-                    <Route path="/Users">
+                    <Route path="/users">
                         <Users />
                     </Route>
+
                 </Switch>
             </Box>
 
