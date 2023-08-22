@@ -32,13 +32,11 @@ import Users from './Users';
 import Dashboard from './Dashboard';
 
 
-interface Props {
-    children: React.ReactNode;
-}
+
 
 const Links = ['Dashboard', 'Users', 'About', 'Contact'];
 
-const NavLink = (props: Props) => {
+const NavLink = (props) => {
     const { children } = props;
 
     return (
@@ -96,7 +94,7 @@ export default function App() {
                                 />
                             </MenuButton>
                             <MenuList>
-                                <MenuItem>Link 1</MenuItem>
+                                <MenuItem>LogOut</MenuItem>
                                 <MenuItem>Link 2</MenuItem>
                                 <MenuDivider />
                                 <MenuItem>Link 3</MenuItem>
