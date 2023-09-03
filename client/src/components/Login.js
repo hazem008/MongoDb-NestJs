@@ -1,9 +1,9 @@
 import {
     Button,
     InputGroup,
-    Checkbox,
     Flex,
     Text,
+    useColorModeValue,
     FormControl,
     InputRightElement,
     FormLabel,
@@ -12,6 +12,7 @@ import {
     Stack,
     Image,
 } from '@chakra-ui/react'
+import { Link } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useState, useContext } from 'react'
 import { GlobalContext } from '../context/GlobalWrapper';
@@ -42,11 +43,20 @@ export default function Login() {
     };
 
     return (
+
         <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
             <Flex p={8} flex={1} align={'center'} justify={'center'}>
-                <Stack spacing={4} w={'full'} maxW={'md'}>
+                <Stack
+                    spacing={4}
+                    w={'full'}
+                    maxW={'md'}
+                    bg={useColorModeValue('white', 'gray.700')}
+                    rounded={'xl'}
+                    boxShadow={'lg'}
+                    p={6}
+                    my={12}>
                     <Heading fontSize={'2xl'}>Sign in to your account</Heading>
-                    <FormControl id="email">
+                    <FormControl id="email" isRequired>
                         <FormLabel>Email address</FormLabel>
                         <Input type="email" value={formData.email} onChange={handleInputChange} />
                         {errors && errors.email && (
@@ -54,38 +64,44 @@ export default function Login() {
                         )}
                     </FormControl>
                     <FormControl id="password" isRequired>
-                            <FormLabel>Password</FormLabel>
-                            <InputGroup>
-                                <Input type={showPassword ? 'text' : 'password'} value={formData.password}
-                                    onChange={handleInputChange} />
+                        <FormLabel>Password</FormLabel>
+                        <InputGroup>
+                            <Input type={showPassword ? 'text' : 'password'} value={formData.password}
+                                onChange={handleInputChange} />
 
-                                <InputRightElement h={'full'}>
+                            <InputRightElement h={'full'}>
 
-                                    <Button
-                                        variant={'ghost'}
-                                        onClick={() => setShowPassword((showPassword) => !showPassword)}>
-                                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                                    </Button>
-                                </InputRightElement>
-                            </InputGroup>
-                            {errors && errors.password && (
-                                <Text color="red.500">{errors.password[0]}</Text>
-                            )}
-                        </FormControl>
-                    <Stack spacing={6}>
-                        <Stack
-                            direction={{ base: 'column', sm: 'row' }}
-                            align={'start'}
-                            justify={'space-between'}>
-                            <Checkbox>Remember me</Checkbox>
-                            <text color={'blue.500'}>New Account</text>
-                        </Stack>
+                                <Button
+                                    variant={'ghost'}
+                                    onClick={() => setShowPassword((showPassword) => !showPassword)}>
+                                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                                </Button>
+                            </InputRightElement>
+                        </InputGroup>
+                        {errors && errors.password && (
+                            <Text color="red.500">{errors.password[0]}</Text>
+                        )}
+                    </FormControl>
+                    <Stack spacing={6} mt={'4'}>
+
                         <Button colorScheme={'blue'} variant={'solid'} onClick={handleLogin}>
                             Sign in
                         </Button>
+                        <Stack pt={2}>
+                            <Text align={'left'}>
+                                Don't have an account?{" "}
+                                <Link to="/signUp" style={{ textDecoration: 'underline', color: 'royalblue', marginLeft: '10px' }}>
+                                    Create new
+                                </Link>
+                            </Text>
+
+
+                        </Stack>
                     </Stack>
                 </Stack>
             </Flex>
+
+
 
             <Flex flex={1}>
                 <Image
@@ -97,5 +113,6 @@ export default function Login() {
                 />
             </Flex>
         </Stack>
+
     )
 }

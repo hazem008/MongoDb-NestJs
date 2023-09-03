@@ -25,7 +25,7 @@ function Users() {
         <div className="App">
 
             <Container maxW={'full'} p="4" fontSize={'18px'}>
-                <Box rounded="lg" boxShadow="base" p="4">
+                <Box rounded="lg" boxShadow="base" p="4" >
                     <Box mt="2" gap={'2'} mb="4" display={'flex'}>
                         <FormControl>
                             <Input type="text" onChange={onchangeHandler} />

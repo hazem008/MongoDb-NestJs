@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    Routes,
     Route,
-    Switch,
     Link,
 } from 'react-router-dom';
 import {
@@ -25,7 +24,7 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 // Importez vos composants de page
-import Home from './Home';
+import NotFound from './NotFound';
 import About from './About';
 import Contact from './Contact';
 import Users from './Users';
@@ -55,12 +54,11 @@ const NavLink = (props) => {
     );
 };
 
-export default function App() {
+export default function Navbar1() {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
-        <Router>
-
+        <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
@@ -115,26 +113,15 @@ export default function App() {
             </Box>
 
             <Box p={4}>
-                <Switch>
-                    <Route path="/home">
-                        <Home />
-                    </Route>
-                    <Route path="/dashboard">
-                        <Dashboard />
-                    </Route>
-                    <Route path="/about">
-                        <About />
-                    </Route>
-                    <Route path="/contact">
-                        <Contact />
-                    </Route>
-                    <Route path="/users">
-                        <Users />
-                    </Route>
-
-                </Switch>
+                <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
+                </Routes>
             </Box>
 
-        </Router>
+            </>
     );
 }

@@ -1,8 +1,13 @@
 import { createContext, useState } from 'react'
 import axios from 'axios';
 import { useToast, useDisclosure } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom';
 export const GlobalContext = createContext();
 export default function Wrapper({ children }) {
+    const handleRefresh = () => {
+        window.location.reload();
+      };
+    const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [errors, setErrors] = useState({});
     const [user, setUser] = useState({});
@@ -21,7 +26,7 @@ export default function Wrapper({ children }) {
     };
     const Search = (query) => {
         axios
-            // eslint-disable-next-line no-template-curly-in-string
+            
             .post(`/api/users/search?key=${query}`)
             .then((res) => {
                 setUsers(res.data);
@@ -135,6 +140,8 @@ export default function Wrapper({ children }) {
                     isClosable: true,
                 });
                 // Rediriger vers le tableau de bord ou autre
+                navigate('/dashboard');
+                handleRefresh();
             })
             .catch((err) => {
                 console.error('Erreur lors de la connexion:', err.response.data);

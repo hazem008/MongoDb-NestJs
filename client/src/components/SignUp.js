@@ -9,17 +9,18 @@ import {
     InputRightElement,
     Stack,
     Button,
+    Image,
     Heading,
     Text,
     useColorModeValue,
-    Link,
 } from '@chakra-ui/react'
+import { Link } from "react-router-dom";
 import { useState, useContext } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { GlobalContext } from '../context/GlobalWrapper';
-//import { useHistory } from 'react-router-dom'; 
+ 
 
-export default function SignUpCart() {
+export default function SignUp() {
     const { SignUp, errors } = useContext(GlobalContext); // Importez la fonction SignUp du contexte
     const [showPassword, setShowPassword] = useState(false)
     const [formData, setFormData] = useState({
@@ -30,6 +31,15 @@ export default function SignUpCart() {
         password: '',
     });
 
+    const resetForm = () => {
+        setFormData({
+            firstName: '',
+            lastName: '',
+            age: '',
+            email: '',
+            password: '',
+        });
+    };
     const handleInputChange = (e) => {
         const { id, value } = e.target;
         setFormData((prevData) => ({
@@ -40,32 +50,37 @@ export default function SignUpCart() {
     const handleSubmit = async () => {
         try {
             await SignUp(formData);
+            resetForm()
             // Redirigez l'utilisateur vers la page Login.js après une inscription réussie
-            //history.push('/login');
+            
         } catch (error) {
             // Gérez l'erreur ici (par exemple, affichez un message d'erreur à l'utilisateur)
         }
     };
 
     return (
+        <Stack  minH={'100vh'} direction={{ base: 'column', md: 'row' }}> 
         <Flex
             minH={'100vh'}
             align={'center'}
             justify={'center'}
             bg={useColorModeValue('gray.50', 'gray.800')}>
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-                <Stack align={'center'}>
-                    <Heading fontSize={'4xl'}>Create your account </Heading>
-                    <Text fontSize={'lg'} color={'gray.600'}>
-                        to enjoy all of our cool <Text color={'blue.400'}>features</Text> ✌️
-                    </Text>
-                </Stack>
                 <Box
                     rounded={'lg'}
                     bg={useColorModeValue('white', 'gray.700')}
                     boxShadow={'lg'}
                     p={8}>
-                    <Stack spacing={4}>
+                    <Stack  align={'center'}>
+                        <Heading fontSize={'4xl'}>Create your account </Heading>
+                        <Text fontSize={'lg'} color={'gray.600'}>
+                            to enjoy all of our cool <Text color={'blue.400'}>features ✌️</Text>
+                        </Text>
+                    </Stack>
+
+
+                    <Stack spacing={4} mt={'10'}>
+
                         <FormControl id="firstName" isRequired>
                             <FormLabel>First Name</FormLabel>
                             <Input type="text" value={formData.firstName}
@@ -131,11 +146,21 @@ export default function SignUpCart() {
                             </Button>
                         </Stack>
                         <Stack pt={6}>
-
+                            <Text align={'center'}>
+                                Already a user?  <Link to="/login" style={{ textDecoration: 'underline', color: 'royalblue' }} >Login</Link>
+                            </Text>
                         </Stack>
                     </Stack>
                 </Box>
             </Stack>
         </Flex>
+        <Flex flex={1}>
+                    <Image spacing={8}   py={12} px={6} width={'150vh'} height={'122vh'}
+                        alt={'Login Image'}
+                        objectFit={'cover'}
+                        src="signUpImg.png"
+                    />
+                </Flex>
+        </Stack>
     )
 }
