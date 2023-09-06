@@ -9,34 +9,22 @@ import {
     Flex,
     HStack,
     IconButton,
-    Menu,
     useDisclosure,
     useColorModeValue,
     Stack,
-    MenuButton,
-    Avatar,
-    MenuList,
-    MenuItem,
-    MenuDivider,
-    Button,
-
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 // Importez vos composants de page
-import NotFound from './NotFound';
-import About from './About';
-import Contact from './Contact';
-import Users from './Users';
-import Dashboard from './Dashboard';
+import SignUp from './SignUp';
+import Login from './Login';
 
-
-
-
-const Links = ['Dashboard', 'Users', 'About', 'Contact'];
+const Links = ['SignUp', 'Login'];
 
 const NavLink = (props) => {
     const { children } = props;
+    const linkColor = useColorModeValue('gray.500', 'white'); // Couleur du lien en mode clair / foncé
+    const linkHoverColor = useColorModeValue('white.700', 'gray.300'); // Couleur du lien au survol
 
     return (
         <Box
@@ -45,10 +33,13 @@ const NavLink = (props) => {
             px={2}
             py={1}
             rounded={'md'}
+            color={linkColor}
             _hover={{
                 textDecoration: 'none',
+                color: linkHoverColor,
                 bg: useColorModeValue('gray.200', 'gray.700'),
-            }}>
+            }}
+            style={{ textDecoration: 'none' }}>
             {children}
         </Box>
     );
@@ -59,7 +50,7 @@ export default function Navbar1() {
 
     return (
         <>
-            <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+            <Box bg="gray.900" px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}
@@ -68,37 +59,13 @@ export default function Navbar1() {
                         display={{ md: 'none' }}
                         onClick={isOpen ? onClose : onOpen}
                     />
-                    <HStack spacing={8} alignItems={'center'}>
-                        <Box>
-                        <img src="esprit.png" alt="Logo" width={100} height={40} />
-                        </Box>
+                    <HStack spacing={8} alignItems={'center'} flex={1} justifyContent="flex-end"> {/* Utilisez justifyContent pour aligner les liens à droite */}
                         <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                             {Links.map((link) => (
                                 <NavLink key={link}>{link}</NavLink>
                             ))}
                         </HStack>
                     </HStack>
-                    <Flex alignItems={'center'}>
-                        <Menu>
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}>
-                                <Avatar
-                                    size={'sm'}
-                                    src={'hazem.png'}
-                                />
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem>LogOut</MenuItem>
-                                <MenuItem>Link 2</MenuItem>
-                                <MenuDivider />
-                                <MenuItem>Link 3</MenuItem>
-                            </MenuList>
-                        </Menu>
-                    </Flex>
                 </Flex>
 
                 {isOpen ? (
@@ -114,13 +81,10 @@ export default function Navbar1() {
 
             <Box p={4}>
                 <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signUp" element={<SignUp />} />
                 </Routes>
             </Box>
-
-            </>
+        </>
     );
 }

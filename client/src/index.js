@@ -13,7 +13,6 @@ root.render(
   <ChakraProvider>
     <BrowserRouter>
       <Wrapper>
-        < Navbar1/>
           <App />
       </Wrapper>
     </BrowserRouter>
