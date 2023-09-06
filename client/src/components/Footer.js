@@ -10,7 +10,7 @@ const Footer = () => {
       color="white"
       w="100%"
       bottom={0}
-
+      fontFamily="Arial, sans-serif"
     >
       <Text fontSize="medium">&copy; 2023 Your Company. All rights reserved.</Text>
     </Box>

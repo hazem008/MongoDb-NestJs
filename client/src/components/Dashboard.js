@@ -43,7 +43,10 @@ const Dashboard = () => {
             
         </HStack>
         <Footer1/>
-        </></>
+
+        </>
+        </>
+        
     )
 
 }

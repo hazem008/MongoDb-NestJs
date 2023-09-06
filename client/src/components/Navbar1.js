@@ -3,6 +3,7 @@ import {
     Routes,
     Route,
     Link,
+    useNavigate
 } from 'react-router-dom';
 import {
     Box,
@@ -24,7 +25,6 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 // Importez vos composants de page
-import NotFound from './NotFound';
 import About from './About';
 import Contact from './Contact';
 import Users from './Users';
@@ -36,6 +36,7 @@ import Dashboard from './Dashboard';
 const Links = ['Dashboard', 'Users', 'About', 'Contact'];
 
 const NavLink = (props) => {
+
     const { children } = props;
 
     return (
@@ -45,6 +46,7 @@ const NavLink = (props) => {
             px={2}
             py={1}
             rounded={'md'}
+            fontFamily="Arial, sans-serif"
             _hover={{
                 textDecoration: 'none',
                 bg: useColorModeValue('gray.200', 'gray.700'),
@@ -56,6 +58,10 @@ const NavLink = (props) => {
 
 export default function Navbar1() {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const navigate = useNavigate();
+    const handleRefresh = () => {
+        window.location.reload();
+    };
 
     return (
         <>
@@ -70,7 +76,7 @@ export default function Navbar1() {
                     />
                     <HStack spacing={8} alignItems={'center'}>
                         <Box>
-                        <img src="esprit.png" alt="Logo" width={100} height={40} />
+                            <img src="esprit.png" alt="Logo" width={100} height={40} />
                         </Box>
                         <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                             {Links.map((link) => (
@@ -92,10 +98,16 @@ export default function Navbar1() {
                                 />
                             </MenuButton>
                             <MenuList>
-                                <MenuItem>LogOut</MenuItem>
-                                <MenuItem>Link 2</MenuItem>
+                                <MenuItem>Profile</MenuItem>
+                                <MenuItem>Settings</MenuItem>
                                 <MenuDivider />
-                                <MenuItem>Link 3</MenuItem>
+                                <MenuItem onClick={ () => {
+                                    setTimeout(() => {
+                                        navigate('/login');
+                                        handleRefresh()// Redirige vers la page de connexion
+                                    }, 2000); // Attendre 2 secondes// Attendre 2 secondes
+                                    localStorage.removeItem('token');
+                                }}>Exit</MenuItem>
                             </MenuList>
                         </Menu>
                     </Flex>
@@ -114,13 +126,13 @@ export default function Navbar1() {
 
             <Box p={4}>
                 <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/users" element={<Users />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
                 </Routes>
             </Box>
 
-            </>
+        </>
     );
 }
