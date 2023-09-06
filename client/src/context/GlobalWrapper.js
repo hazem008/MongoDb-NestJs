@@ -6,7 +6,7 @@ export const GlobalContext = createContext();
 export default function Wrapper({ children }) {
     const handleRefresh = () => {
         window.location.reload();
-      };
+    };
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [errors, setErrors] = useState({});
@@ -26,7 +26,7 @@ export default function Wrapper({ children }) {
     };
     const Search = (query) => {
         axios
-            
+
             .post(`/api/users/search?key=${query}`)
             .then((res) => {
                 setUsers(res.data);
@@ -119,7 +119,7 @@ export default function Wrapper({ children }) {
                     isClosable: true,
                 });
                 // Rediriger vers la page de connexion ou autre
-              
+
             })
             .catch((err) => {
                 setErrors(err.response.data.error);
@@ -136,12 +136,16 @@ export default function Wrapper({ children }) {
                 toast({
                     title: 'Connexion réussie!',
                     status: 'success',
-                    duration: 4000,
+                    duration: 1500,
                     isClosable: true,
                 });
-                // Rediriger vers le tableau de bord ou autre
-                navigate('/dashboard');
-                handleRefresh();
+                // Attendre pendant quelques secondes avant de rediriger
+                setTimeout(() => {
+                    // Rediriger vers le tableau de bord ou autre
+                    navigate('/dashboard');
+                    handleRefresh();
+                }, 2000);
+
             })
             .catch((err) => {
                 console.error('Erreur lors de la connexion:', err.response.data);

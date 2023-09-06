@@ -109,7 +109,7 @@ export default function Login() {
                                 Sign in
                             </Button>
                             <Stack pt={2}>
-                                <Text fontSize={'sm'} align={'center'}>
+                                <Text fontSize={'medium'} align={'center'}>
                                     Don't have an account?{" "}
                                     <Link to="/signUp" style={{ textDecoration: 'underline', color: 'royalblue', marginLeft: '10px' }}>
                                         Create new
