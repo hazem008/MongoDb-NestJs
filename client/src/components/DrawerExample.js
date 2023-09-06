@@ -15,7 +15,7 @@ import InputsGroup from './InputsGroup';
 
 
 export default function DrawerExample() {
-    const { onOpen, isOpen, onClose, Add, errors, user, setErrors, Update } = useContext(GlobalContext);
+    const { isOpen, onClose, Add, errors, user, setErrors, Update } = useContext(GlobalContext);
     const [form, setForm] = useState({
         firstName: "",
         lastName: "",

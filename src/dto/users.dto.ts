@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, MaxLength } from 'class-validator';
 
 export class UserDto {
   @IsNotEmpty()
@@ -10,7 +10,7 @@ export class UserDto {
   @IsNotEmpty()
   age: number;
 
-  @IsEmail()
+  @IsEmail({}, { message: 'Invalid email' })
   email: string;
 
   @IsNotEmpty()

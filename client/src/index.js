@@ -1,18 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Wrapper from './context/GlobalWrapper';
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter } from "react-router-dom";
+import Navbar1 from './components/Navbar1';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <ChakraProvider>
-    <Wrapper>
-      <App />
-    </Wrapper>
+    <BrowserRouter>
+      <Wrapper>
+          <App />
+      </Wrapper>
+    </BrowserRouter>
   </ChakraProvider>
-
 );
-
-
